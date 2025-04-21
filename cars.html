@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cars | AutoX</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <h1 class="logo">AutoX</h1>
+    <nav>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="cars.html">Cars</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Available Cars</h2>
+
+    <!-- Search Bar -->
+    <input type="text" id="searchBar" placeholder="Search Cars..." oninput="filterCars()" />
+
+    <div class="car-list" id="carList">
+      <!-- Car Cards -->
+      <div class="car-card" data-name="Honda Civic LX" onclick="openCarModal(
+        'Honda Civic LX',
+        'Tango Red',
+        '140 HP',
+        '30,000 km',
+        '2022',
+        [
+          '1.jpeg',
+          '2.jpeg',
+          '3.jpeg',
+          '4.jpeg',
+          '1.jpeg',
+          '2.jpeg'
+        ]
+      )">
+        <img src="1.jpeg" alt="Honda Civic LX" />
+        <h3>Honda Civic LX</h3>
+        <p>Starting at $22,000</p>
+      </div>
+      <div class="car-card" data-name="BMW M4" onclick="openCarModal(
+        'BMW M4',
+        'Alpine White',
+        '3.0L Turbocharged Inline-6',
+        '12,000 km',
+        '2023',
+        [
+          'images/bmw-m4-front.jpg',
+          'images/bmw-m4-side.jpg',
+          'images/bmw-m4-rear.jpg',
+          'images/bmw-m4-dashboard.jpg'
+        ]
+      )">
+        <img src="2.jpeg" alt="BMW M4" />
+        <h3>BMW M4</h3>
+        <p>Starting at $72,000</p>
+      </div>
+      <div class="car-card" data-name="Audi R8" onclick="openCarModal(
+        'Audi R8',
+        'Quantum Gray',
+        '5.2L V10',
+        '20,000 km',
+        '2021',
+        [
+          'images/audi-r8-front.jpg',
+          'images/audi-r8-side.jpg',
+          'images/audi-r8-rear.jpg',
+          'images/audi-r8-dashboard.jpg'
+        ]
+      )">
+        <img src="3.jpeg" alt="Audi R8" />
+        <h3>Audi R8</h3>
+        <p>Starting at $142,000</p>
+      </div>
+      <div class="car-card" data-name="Mercedes S-Class" onclick="openCarModal(
+        'Mercedes S-Class',
+        'Obsidian Black',
+        '4.0L V8 Bi-Turbo',
+        '15,000 km',
+        '2020',
+        [
+          'images/mercedes-s-class-front.jpg',
+          'images/mercedes-s-class-side.jpg',
+          'images/mercedes-s-class-rear.jpg',
+          'images/mercedes-s-class-interior.jpg'
+        ]
+      )">
+        <img src="4.jpeg" alt="Mercedes S-Class" />
+        <h3>Mercedes S-Class</h3>
+        <p>Starting at $90,000</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Car Detail Modal -->
+  <div id="carModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p><strong>Color:</strong> <span id="modalColor"></span></p>
+      <p><strong>Engine Capacity:</strong> <span id="modalEngine"></span></p>
+      <p><strong>Mileage:</strong> <span id="modalMileage"></span></p>
+      <p><strong>Year:</strong> <span id="modalYear"></span></p>
+      
+      <div id="modalGallery" class="gallery"></div>
+    </div>
+  </div>
+  
+  <footer>
+    <p>© 2025 AutoX. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

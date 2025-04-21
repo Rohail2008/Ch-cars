@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - AutoX</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1 class="logo">AutoX</h1>
+    <nav>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="cars.html">Cars</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><button onclick="toggleTheme()" class="theme-toggle">🌓</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Contact Us</h2>
+    <p>We'd love to hear from you! Please fill out the form below to get in touch.</p>
+    <form id="contact-form">
+      <div class="form-group">
+        <input type="text" id="name" placeholder="Your Name" required />
+      </div>
+      <div class="form-group">
+        <input type="email" id="email" placeholder="Your Email" required />
+      </div>
+      <div class="form-group">
+        <textarea id="message" placeholder="Your Message" required></textarea>
+      </div>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 AutoX. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
