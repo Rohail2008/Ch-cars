@@ -24,7 +24,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     }
 
@@ -74,54 +73,44 @@
       color: #ff3c3c;
     }
 
-    .slider-container {
+    .slider-wrapper {
+      overflow: hidden;
       position: relative;
-      width: 100%;
+      border-radius: 15px;
       max-width: 800px;
       margin: auto;
-      overflow: hidden;
-      border-radius: 15px;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .slider {
+    .slider-track {
       display: flex;
-      transition: opacity 1s ease-in-out;
-      position: relative;
+      transition: transform 0.4s ease;
+      touch-action: pan-y;
     }
 
-    .slider img {
+    .slider-track img {
       width: 100%;
-      height: auto;
-      object-fit: cover;
+      flex-shrink: 0;
       border-radius: 15px;
-    }
-
-    .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2rem;
-      color: #fff;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 10px;
-      border-radius: 50%;
       cursor: pointer;
-      z-index: 2;
-      user-select: none;
-      transition: transform 0.3s;
     }
 
-    .arrow:hover {
-      transform: translateY(-50%) scale(1.2);
+    .dots {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
     }
 
-    .arrow.left {
-      left: 10px;
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #555;
+      cursor: pointer;
     }
 
-    .arrow.right {
-      right: 10px;
+    .dot.active {
+      background: #ff3c3c;
     }
 
     .details-grid {
@@ -145,6 +134,29 @@
       color: #ff3c3c;
     }
 
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+
+    .lightbox:active {
+      display: none;
+    }
+
     @media screen and (max-width: 768px) {
       .nav-links {
         flex-direction: column;
@@ -163,11 +175,6 @@
       .menu-toggle {
         display: block;
       }
-
-      .arrow {
-        font-size: 1.5rem;
-        padding: 6px;
-      }
     }
   </style>
 </head>
@@ -175,10 +182,10 @@
   <header class="navbar">
     <div class="logo">Auto<span>X</span></div>
     <nav class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="About.html">About</a>
-      <a href="Cars.html">Cars</a>
-      <a href="Contact.html">Contact</a>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Cars</a>
+      <a href="#">Contact</a>
     </nav>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   </header>
@@ -186,17 +193,15 @@
   <main class="container">
     <h1>Honda Civic LX – 2022</h1>
 
-    <div class="slider-container">
-      <div class="arrow left" onclick="prevSlide()">❮</div>
-      <div class="slider" id="slider">
-        <!-- Add 5-10 image URLs below -->
-        <img src="https://i.imgur.com/ZXBtVw7.jpg" alt="Car 1" />
-        <img src="https://i.imgur.com/LGy2npz.jpg" alt="Car 2" />
-        <img src="https://i.imgur.com/3u1wLqk.jpg" alt="Car 3" />
-        <img src="https://i.imgur.com/GK7rNAr.jpg" alt="Car 4" />
-        <img src="https://i.imgur.com/hmHMzO0.jpg" alt="Car 5" />
+    <div class="slider-wrapper" id="sliderWrapper">
+      <div class="slider-track" id="sliderTrack">
+        <img src="https://i.imgur.com/ZXBtVw7.jpg" alt="Car 1" onclick="openLightbox(this.src)" />
+        <img src="https://i.imgur.com/LGy2npz.jpg" alt="Car 2" onclick="openLightbox(this.src)" />
+        <img src="https://i.imgur.com/3u1wLqk.jpg" alt="Car 3" onclick="openLightbox(this.src)" />
+        <img src="https://i.imgur.com/GK7rNAr.jpg" alt="Car 4" onclick="openLightbox(this.src)" />
+        <img src="https://i.imgur.com/hmHMzO0.jpg" alt="Car 5" onclick="openLightbox(this.src)" />
       </div>
-      <div class="arrow right" onclick="nextSlide()">❯</div>
+      <div class="dots" id="dots"></div>
     </div>
 
     <div class="details-grid">
@@ -206,36 +211,73 @@
       <div><strong>Mileage:</strong> 30,000 km</div>
       <div><strong>Transmission:</strong> CVT</div>
       <div><strong>Fuel Type:</strong> Gasoline</div>
-      <div><strong>Drivetrain:</strong> FWD</div>
+
       <div><strong>Year:</strong> 2022</div>
     </div>
   </main>
 
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightboxImg" />
+  </div>
+
   <script>
-    const slider = document.getElementById('slider');
-    let currentIndex = 0;
-    let images = slider.querySelectorAll('img');
-    const totalImages = images.length;
+    const sliderTrack = document.getElementById('sliderTrack');
+    const slides = sliderTrack.children;
+    const dotsContainer = document.getElementById('dots');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    let currentSlide = 0;
 
     function updateSlider() {
-      // Fade effect
-      slider.style.opacity = 0;
-      setTimeout(() => {
-        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-        slider.style.opacity = 1;
-      }, 500);  // Delay to allow fade-out effect
+      sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+      document.querySelectorAll('.dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
     }
 
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % totalImages;
+    function goToSlide(index) {
+      currentSlide = index;
       updateSlider();
     }
 
-    function prevSlide() {
-      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-      updateSlider();
+    for (let i = 0; i < slides.length; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
     }
 
+    updateSlider();
+
+    // Swipe support
+    let startX = 0;
+
+    sliderTrack.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    sliderTrack.addEventListener('touchend', (e) => {
+      let endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) {
+        currentSlide = (currentSlide + 1) % slides.length;
+      } else if (endX - startX > 50) {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      }
+      updateSlider();
+    });
+
+    // Lightbox
+    function openLightbox(src) {
+      lightboxImg.src = src;
+      lightbox.style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+    }
+
+    // Menu toggle
     function toggleMenu() {
       document.getElementById("navLinks").classList.toggle("show");
     }
