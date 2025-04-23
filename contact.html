@@ -24,16 +24,18 @@
   <section>
     <h2>Contact Us</h2>
     <p>We'd love to hear from you! Please fill out the form below to get in touch.</p>
-    <form id="contact-form">
+    
+    <!-- Formspree Contact Form -->
+    <form action="https://formspree.io/f/xovvleqp" method="POST">
       <div class="form-group">
-        <input type="text" id="name" placeholder="Your Name" required />
+        <label for="email">Your email:</label>
+        <input type="email" name="email" id="email" required />
       </div>
       <div class="form-group">
-        <input type="email" id="email" placeholder="Your Email" required />
+        <label for="message">Your message:</label>
+        <textarea name="message" id="message" required></textarea>
       </div>
-      <div class="form-group">
-        <textarea id="message" placeholder="Your Message" required></textarea>
-      </div>
+      <!-- Add more fields if needed -->
       <button type="submit">Send</button>
     </form>
   </section>
