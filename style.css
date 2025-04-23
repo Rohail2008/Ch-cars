@@ -1,4 +1,4 @@
-/* Reset & Base Styles */
+/* ========== Reset & Base Styles ========== */
 * {
   margin: 0;
   padding: 0;
@@ -10,9 +10,11 @@ body {
   background-color: #0e0e0e;
   color: #eee;
   line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
 }
 
-/* Header & Navigation */
+/* ========== Header & Navigation ========== */
 header {
   background-color: #111;
   padding: 1.5rem 2rem;
@@ -20,6 +22,8 @@ header {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #222;
+  position: relative;
+  z-index: 999;
 }
 
 header h1 {
@@ -28,48 +32,38 @@ header h1 {
   font-weight: bold;
 }
 
-nav ul {
-  list-style: none;
+nav {
   display: flex;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 2rem;
 }
 
-nav a {
-  color: #eee;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color: #ff4c29;
-}
-
-/* Mobile Menu Toggle */
 .menu-toggle {
   font-size: 2rem;
-  cursor: pointer;
+  background: none;
+  border: none;
+  color: #eee;
   display: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 #nav-links {
   display: flex;
-  list-style-type: none;
-  padding: 0;
+  list-style: none;
+  gap: 1.5rem;
 }
 
-#nav-links li {
-  margin: 0 1rem;
-}
-
-#nav-links a {
+#nav-links li a {
+  color: #eee;
   text-decoration: none;
-  color: #fff;
+  font-weight: 500;
   font-size: 1.1rem;
+  transition: color 0.3s;
 }
 
-#nav-links.show {
-  display: block;
+#nav-links li a:hover {
+  color: #ff4c29;
 }
 
 @media (max-width: 768px) {
@@ -78,13 +72,35 @@ nav a:hover {
   }
 
   #nav-links {
-    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
     flex-direction: column;
     align-items: center;
+    background-color: #111;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  #nav-links.show {
+    display: flex;
+  }
+
+  #nav-links li {
+    width: 100%;
+    text-align: center;
   }
 }
 
-/* Hero Section */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== Hero Section ========== */
 .hero {
   background: url('https://source.unsplash.com/1600x600/?luxury-car,supercar') center/cover no-repeat;
   padding: 6rem 2rem;
@@ -118,7 +134,7 @@ nav a:hover {
   background: #e84118;
 }
 
-/* Sections */
+/* ========== Section Base ========== */
 section {
   padding: 4rem 2rem;
 }
@@ -129,45 +145,109 @@ h2 {
   color: #fff;
 }
 
-/* Car Listings */
+/* ========== Car Listings ========== */
 .car-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1.5rem;
   justify-content: center;
 }
 
 .car-card {
-  background-color: #1a1a1a;
-  border: 1px solid #292929;
-  border-radius: 12px;
-  width: 320px;
+  background-color: #fff;
+  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  transition: transform 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  flex: 1 1 280px;
+  max-width: 300px;
+  min-width: 260px;
+  color: #333;
 }
 
 .car-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .car-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .car-card h3 {
-  color: #ff4c29;
-  margin: 1rem;
+  font-size: 1.4rem;
+  margin: 1rem 1rem 0.5rem;
+  color: #333;
 }
 
 .car-card p {
   margin: 0 1rem 1rem;
-  color: #bbb;
+  color: #777;
 }
 
-/* Form Styling */
+/* Beautified Details Button */
+.car-card button {
+  display: block;
+  margin: 1rem auto 1.5rem;
+  padding: 0.7rem 1.5rem;
+  background: #ff4c29;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 76, 41, 0.4);
+}
+
+.car-card button:hover {
+  background: #e84118;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 76, 41, 0.5);
+}
+
+@media (max-width: 992px) {
+  .car-card {
+    flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 600px) {
+  .car-card {
+    flex: 1 1 100%;
+  }
+}
+
+/* ========== Search Bar ========== */
+#searchBar {
+  width: 100%;
+  padding: 0.9rem 1.25rem;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  border: 2px solid #ccc;
+  background-color: #333;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+#searchBar:focus {
+  outline: none;
+  border-color: #ff4c29;
+  box-shadow: 0 0 10px rgba(255, 76, 41, 0.6);
+}
+
+#searchBar::placeholder {
+  color: #bbb;
+  font-style: italic;
+}
+
+/* ========== Forms ========== */
 form {
   display: flex;
   flex-direction: column;
@@ -188,8 +268,7 @@ input, textarea {
   resize: none;
 }
 
-input::placeholder,
-textarea::placeholder {
+input::placeholder, textarea::placeholder {
   color: #888;
 }
 
@@ -208,7 +287,7 @@ button:hover {
   background: #e84118;
 }
 
-/* Footer */
+/* ========== Footer ========== */
 footer {
   background: #111;
   text-align: center;
@@ -217,77 +296,7 @@ footer {
   color: #aaa;
 }
 
-/* Car Cards Layout */
-.car-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 2rem;
-}
-
-.car-card {
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 23%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.car-card img {
-  width: 100%;
-  height: auto;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-}
-
-.car-card h3 {
-  padding: 1rem;
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 0.5rem;
-}
-
-.car-card p {
-  padding: 0 1rem;
-  color: #777;
-}
-
-.car-card .price {
-  padding: 0 1rem;
-  color: #ff4c29;
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-
-.car-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* Search Bar Styles */
-#searchBar {
-  width: 100%;
-  padding: 0.9rem 1.25rem;
-  margin-bottom: 2rem;
-  font-size: 1.2rem;
-  border-radius: 30px;
-  border: 2px solid #ccc;
-  background-color: #333;
-  color: #fff;
-}
-
-#searchBar:focus {
-  outline: none;
-  border-color: #ff4c29;
-  box-shadow: 0 0 10px rgba(255, 76, 41, 0.6);
-}
-
-#searchBar::placeholder {
-  color: #bbb;
-  font-style: italic;
-}
-
-/* Car Detail Modal */
+/* ========== Modal ========== */
 .modal {
   display: none;
   position: fixed;
@@ -311,17 +320,9 @@ footer {
   border-radius: 10px;
   width: 90%;
   max-width: 700px;
-  text-align: center;
   color: white;
   position: relative;
-}
-
-.modal-content img {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .close {
@@ -337,13 +338,137 @@ footer {
   color: #fff;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
+/* ========== Theme Toggle ========== */
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: inherit;
+  transition: color 0.3s;
+}
+
+.theme-toggle:hover {
+  color: #ff4c29;
+}
+
+/* ========== Light Theme Override ========== */
+body.dark-theme {
+  background-color: #ffffff;
+  color: #222;
+}
+
+body.dark-theme header,
+body.dark-theme footer {
+  background-color: #f2f2f2;
+  color: #111;
+}
+
+body.dark-theme nav a,
+body.dark-theme #nav-links a {
+  color: #111;
+}
+
+body.dark-theme nav a:hover,
+body.dark-theme #nav-links a:hover {
+  color: #ff4c29;
+}
+
+body.dark-theme .car-card {
+  background-color: #f9f9f9;
+  color: #222;
+}
+
+body.dark-theme .car-card h3 {
+  color: #111;
+}
+
+body.dark-theme #searchBar {
+  background-color: #eee;
+  color: #222;
+  border-color: #bbb;
+}
+
+
+
+
+
+main.car-details {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.car-details h2 {
+  text-align: center;
+  color: #1c2331;
+  margin-bottom: 30px;
+  font-size: 2em;
+}
+
+/* Swiper styles */
+.swiper {
+  width: 100%;
+  max-height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+}
+
+.swiper-slide a img {
+  width: auto;
+  height: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  border-radius: 8px;
+}
+
+.swiper-slide a img:hover {
+  transform: scale(1.02);
+  cursor: zoom-in;
+}
+
+.car-specs {
+  font-size: 1.1em;
+  padding: 10px;
+}
+
+.car-specs p {
+  margin: 10px 0;
+  border-left: 5px solid #1c2331;
+  padding-left: 12px;
+}
+
+footer {
+  background-color: #1c2331;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .swiper {
+    max-height: 300px;
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+
+  .swiper-slide img {
+    max-height: 300px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
