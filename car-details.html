@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoX - Car Details</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #111;
+      color: white;
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background: #000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .logo span {
+      color: #ff3c3c;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ff3c3c;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: white;
+    }
+
+    .container {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #ff3c3c;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .slider {
+      display: flex;
+      transition: opacity 1s ease-in-out;
+      position: relative;
+    }
+
+    .slider img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+      user-select: none;
+      transition: transform 0.3s;
+    }
+
+    .arrow:hover {
+      transform: translateY(-50%) scale(1.2);
+    }
+
+    .arrow.left {
+      left: 10px;
+    }
+
+    .arrow.right {
+      right: 10px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .details-grid div {
+      background: #222;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      text-align: left;
+    }
+
+    .details-grid div strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #ff3c3c;
+    }
+
+    @media screen and (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: #000;
+        width: 100%;
+        display: none;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .arrow {
+        font-size: 1.5rem;
+        padding: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">Auto<span>X</span></div>
+    <nav class="nav-links" id="navLinks">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Cars</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  </header>
+
+  <main class="container">
+    <h1>Honda Civic LX – 2022</h1>
+
+    <div class="slider-container">
+      <div class="arrow left" onclick="prevSlide()">❮</div>
+      <div class="slider" id="slider">
+        <!-- Add 5-10 image URLs below -->
+        <img src="https://i.imgur.com/ZXBtVw7.jpg" alt="Car 1" />
+        <img src="https://i.imgur.com/LGy2npz.jpg" alt="Car 2" />
+        <img src="https://i.imgur.com/3u1wLqk.jpg" alt="Car 3" />
+        <img src="https://i.imgur.com/GK7rNAr.jpg" alt="Car 4" />
+        <img src="https://i.imgur.com/hmHMzO0.jpg" alt="Car 5" />
+      </div>
+      <div class="arrow right" onclick="nextSlide()">❯</div>
+    </div>
+
+    <div class="details-grid">
+      <div><strong>Price:</strong> $22,000</div>
+      <div><strong>Color:</strong> Tango Red</div>
+      <div><strong>Engine:</strong> 140 HP</div>
+      <div><strong>Mileage:</strong> 30,000 km</div>
+      <div><strong>Transmission:</strong> CVT</div>
+      <div><strong>Fuel Type:</strong> Gasoline</div>
+      <div><strong>Drivetrain:</strong> FWD</div>
+      <div><strong>Year:</strong> 2022</div>
+    </div>
+  </main>
+
+  <script>
+    const slider = document.getElementById('slider');
+    let currentIndex = 0;
+    let images = slider.querySelectorAll('img');
+    const totalImages = images.length;
+
+    function updateSlider() {
+      // Fade effect
+      slider.style.opacity = 0;
+      setTimeout(() => {
+        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+        slider.style.opacity = 1;
+      }, 500);  // Delay to allow fade-out effect
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalImages;
+      updateSlider();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      updateSlider();
+    }
+
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("show");
+    }
+  </script>
+</body>
+</html>
