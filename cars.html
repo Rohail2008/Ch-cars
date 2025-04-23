@@ -16,9 +16,11 @@
         <li><a href="about.html">About</a></li>
         <li><a href="cars.html">Cars</a></li>
         <li><a href="contact.html">Contact</a></li>
-      </ul>
+        <li><button onclick="toggleTheme()" class="theme-toggle">🌓</button></li>
+      </ul> 
     </nav>
   </header>
+
 
   <section>
     <h2>Available Cars</h2>
@@ -28,75 +30,32 @@
 
     <div class="car-list" id="carList">
       <!-- Car Cards -->
-      <div class="car-card" data-name="Honda Civic LX" onclick="openCarModal(
-        'Honda Civic LX',
-        'Tango Red',
-        '140 HP',
-        '30,000 km',
-        '2022',
-        [
-          '1.jpeg',
-          '2.jpeg',
-          '3.jpeg',
-          '4.jpeg',
-          '1.jpeg',
-          '2.jpeg'
-        ]
-      )">
+      <div class="car-card" data-name="Honda Civic LX" data-color="Tango Red" data-engine="140 HP" data-mileage="30,000 km" data-year="2022" data-images='["1.jpeg","2.jpeg","3.jpeg","4.jpeg","1.jpeg","2.jpeg"]'>
         <img src="1.jpeg" alt="Honda Civic LX" />
         <h3>Honda Civic LX</h3>
         <p>Starting at $22,000</p>
+        <button onclick="window.open('car-details.html', '_blank')">Details</button>
       </div>
-      <div class="car-card" data-name="BMW M4" onclick="openCarModal(
-        'BMW M4',
-        'Alpine White',
-        '3.0L Turbocharged Inline-6',
-        '12,000 km',
-        '2023',
-        [
-          'images/bmw-m4-front.jpg',
-          'images/bmw-m4-side.jpg',
-          'images/bmw-m4-rear.jpg',
-          'images/bmw-m4-dashboard.jpg'
-        ]
-      )">
+
+      <div class="car-card" data-name="BMW M4" data-color="Alpine White" data-engine="3.0L Turbocharged Inline-6" data-mileage="12,000 km" data-year="2023" data-images='["images/bmw-m4-front.jpg","images/bmw-m4-side.jpg","images/bmw-m4-rear.jpg","images/bmw-m4-dashboard.jpg"]'>
         <img src="2.jpeg" alt="BMW M4" />
         <h3>BMW M4</h3>
         <p>Starting at $72,000</p>
+        <button onclick="window.open('car-details.html', '_blank')">Details</button>
       </div>
-      <div class="car-card" data-name="Audi R8" onclick="openCarModal(
-        'Audi R8',
-        'Quantum Gray',
-        '5.2L V10',
-        '20,000 km',
-        '2021',
-        [
-          'images/audi-r8-front.jpg',
-          'images/audi-r8-side.jpg',
-          'images/audi-r8-rear.jpg',
-          'images/audi-r8-dashboard.jpg'
-        ]
-      )">
+
+      <div class="car-card" data-name="Audi R8" data-color="Quantum Gray" data-engine="5.2L V10" data-mileage="20,000 km" data-year="2021" data-images='["images/audi-r8-front.jpg","images/audi-r8-side.jpg","images/audi-r8-rear.jpg","images/audi-r8-dashboard.jpg"]'>
         <img src="3.jpeg" alt="Audi R8" />
         <h3>Audi R8</h3>
         <p>Starting at $142,000</p>
+        <button onclick="window.open('car-details.html', '_blank')">Details</button>
       </div>
-      <div class="car-card" data-name="Mercedes S-Class" onclick="openCarModal(
-        'Mercedes S-Class',
-        'Obsidian Black',
-        '4.0L V8 Bi-Turbo',
-        '15,000 km',
-        '2020',
-        [
-          'images/mercedes-s-class-front.jpg',
-          'images/mercedes-s-class-side.jpg',
-          'images/mercedes-s-class-rear.jpg',
-          'images/mercedes-s-class-interior.jpg'
-        ]
-      )">
+
+      <div class="car-card" data-name="Mercedes S-Class" data-color="Obsidian Black" data-engine="4.0L V8 Bi-Turbo" data-mileage="15,000 km" data-year="2020" data-images='["images/mercedes-s-class-front.jpg","images/mercedes-s-class-side.jpg","images/mercedes-s-class-rear.jpg","images/mercedes-s-class-interior.jpg"]'>
         <img src="4.jpeg" alt="Mercedes S-Class" />
         <h3>Mercedes S-Class</h3>
         <p>Starting at $90,000</p>
+        <button onclick="window.open('car-details.html', '_blank')">Details</button>
       </div>
     </div>
   </section>
@@ -110,11 +69,10 @@
       <p><strong>Engine Capacity:</strong> <span id="modalEngine"></span></p>
       <p><strong>Mileage:</strong> <span id="modalMileage"></span></p>
       <p><strong>Year:</strong> <span id="modalYear"></span></p>
-      
       <div id="modalGallery" class="gallery"></div>
     </div>
   </div>
-  
+
   <footer>
     <p>© 2025 AutoX. All rights reserved.</p>
   </footer>
