@@ -37,6 +37,20 @@
       color: #ff3c3c;
     }
 
+    .nav-buttons a {
+      text-decoration: none;
+      background: #ff3c3c;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    .nav-buttons a:hover {
+      background: #e02929;
+    }
+
     .container {
       max-width: 1200px;
       margin: auto;
@@ -173,16 +187,13 @@
       background: #222;
       padding: 2rem;
       border-radius: 8px;
+      text-align: center;
     }
 
-    .testimonial {
-      margin-bottom: 1.5rem;
-    }
-
-    .testimonial strong {
-      color: #ff3c3c;
-      display: block;
-      margin-bottom: 0.5rem;
+    .testimonials::before {
+      content: "Customer testimonials coming soon!";
+      color: #aaa;
+      font-style: italic;
     }
 
     .contact {
@@ -264,6 +275,9 @@
 
   <header class="navbar">
     <div class="logo">Auto<span>X</span></div>
+    <div class="nav-buttons">
+      <a href="Cars.html">Home</a>
+    </div>
   </header>
 
   <main class="container">
@@ -309,16 +323,7 @@
       <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Test Drive</button>
     </div>
 
-    <div class="testimonials">
-      <div class="testimonial">
-        <strong>Ali Raza</strong>
-        <p>Amazing car and great service. Everything went smoothly. Highly recommended!</p>
-      </div>
-      <div class="testimonial">
-        <strong>Sarah Khan</strong>
-        <p>The team helped me finance the Civic easily. Love how smooth it drives!</p>
-      </div>
-    </div>
+    <div class="testimonials"></div>
 
     <div class="contact" id="contact">
       <h2>Contact Us</h2>
@@ -340,7 +345,6 @@
     const dotsContainer = document.getElementById('dots');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
-
     let currentSlide = 0;
     let startX = 0;
 
