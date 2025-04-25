@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <title>AutoX - Car Details</title>
   <style>
     * {
@@ -15,21 +14,21 @@
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #111;
-      color: white;
+      color: #fff;
       line-height: 1.6;
     }
 
     .navbar {
       background: #000;
-      padding: 1rem 2rem;
+      padding: 1.2rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.7);
     }
 
     .logo {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: bold;
       color: #fff;
     }
@@ -42,8 +41,8 @@
       text-decoration: none;
       background: #ff3c3c;
       color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
       font-size: 1rem;
       transition: background 0.3s;
     }
@@ -55,42 +54,41 @@
     .container {
       max-width: 1200px;
       margin: auto;
-      padding: 2rem;
+      padding: 3rem 1rem;
     }
 
     h1 {
-      font-size: 2.5rem;
-      color: #ff3c3c;
+      font-size: 3rem;
       text-align: center;
-      margin-bottom: 1.5rem;
-      animation: fadeIn 1s ease;
+      margin-bottom: 2rem;
+      color: #ff3c3c;
+      animation: fadeIn 1s ease-in-out;
     }
 
     .slider-wrapper {
       overflow: hidden;
-      border-radius: 12px;
-      margin: auto;
+      border-radius: 15px;
+      margin-bottom: 1rem;
     }
 
     .slider-track {
       display: flex;
-      transition: transform 0.4s ease;
+      transition: transform 0.5s ease;
     }
 
     .slider-track img {
       width: 100%;
-      height: 400px;
+      height: 420px;
       object-fit: cover;
-      flex-shrink: 0;
-      border-radius: 12px;
+      border-radius: 15px;
       cursor: pointer;
     }
 
     .dots {
       display: flex;
       justify-content: center;
-      margin-top: 10px;
       gap: 10px;
+      margin-top: 10px;
     }
 
     .dot {
@@ -113,18 +111,17 @@
       display: flex;
       justify-content: center;
       gap: 1rem;
-      overflow-x: auto;
+      flex-wrap: wrap;
     }
 
     .tab-buttons button {
-      padding: 0.5rem 1.5rem;
-      border: none;
-      border-radius: 6px;
       background: #222;
       color: white;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s;
-      white-space: nowrap;
+      transition: background 0.3s ease;
     }
 
     .tab-buttons button.active {
@@ -132,48 +129,45 @@
     }
 
     .tab-content {
-      background: #222;
-      border-radius: 8px;
+      background: #1c1c1c;
+      border-radius: 12px;
       padding: 2rem;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       display: none;
-      animation: fadeIn 0.5s ease;
     }
 
     .tab-content.active {
       display: block;
     }
 
-    .details-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.5rem;
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
     }
 
-    .details-grid div {
-      background: #333;
+    .specs-table th,
+    .specs-table td {
       padding: 1rem;
-      border-radius: 8px;
-      text-align: center;
+      text-align: left;
+      border-bottom: 1px solid #333;
     }
 
-    .details-grid div strong {
-      display: block;
-      margin-bottom: 0.5rem;
+    .specs-table th {
       color: #ff3c3c;
     }
 
     .cta {
       text-align: center;
-      margin: 2rem 0;
+      margin: 3rem 0;
     }
 
     .cta button {
-      padding: 0.8rem 2rem;
-      font-size: 1.1rem;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
       background: #ff3c3c;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       color: white;
       cursor: pointer;
       transition: background 0.3s;
@@ -184,11 +178,11 @@
     }
 
     .testimonials {
-      margin-top: 3rem;
-      background: #222;
+      background: #1c1c1c;
       padding: 2rem;
-      border-radius: 8px;
+      border-radius: 10px;
       text-align: center;
+      margin-top: 3rem;
     }
 
     .testimonials::before {
@@ -198,31 +192,31 @@
     }
 
     .contact {
-      background: #222;
+      background: #1c1c1c;
       padding: 2rem;
-      border-radius: 8px;
+      border-radius: 12px;
       margin-top: 3rem;
     }
 
     .contact h2 {
       text-align: center;
       color: #ff3c3c;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .contact form {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.2rem;
     }
 
     .contact input,
     .contact textarea {
       width: 100%;
       padding: 1rem;
-      border: none;
-      border-radius: 6px;
       background: #333;
+      border: none;
+      border-radius: 8px;
       color: white;
       resize: vertical;
     }
@@ -234,7 +228,7 @@
       padding: 1rem 2rem;
       color: white;
       font-size: 1rem;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s;
     }
@@ -256,8 +250,8 @@
 
     .lightbox img {
       max-width: 90%;
-      max-height: 80%;
-      border-radius: 10px;
+      max-height: 85%;
+      border-radius: 12px;
     }
 
     @keyframes fadeIn {
@@ -282,7 +276,7 @@
   </header>
 
   <main class="container">
-    <h1>BMW M4</h1>
+    <h1>Honda Civic LX – 2022</h1>
 
     <div class="slider-wrapper">
       <div class="slider-track" id="sliderTrack">
@@ -305,14 +299,14 @@
       </div>
 
       <div class="tab-content" id="specs">
-        <div class="details-grid">
-          <div><strong>Engine</strong> 140 HP</div>
-          <div><strong>Mileage</strong> 30,000 km</div>
-          <div><strong>Transmission</strong> CVT</div>
-          <div><strong>Fuel Type</strong> Gasoline</div>
-          <div><strong>Year</strong> 2022</div>
-          <div><strong>Color</strong> Tango Red</div>
-        </div>
+        <table class="specs-table">
+          <tr><th>Engine</th><td>140 HP</td></tr>
+          <tr><th>Mileage</th><td>30,000 km</td></tr>
+          <tr><th>Transmission</th><td>CVT</td></tr>
+          <tr><th>Fuel Type</th><td>Gasoline</td></tr>
+          <tr><th>Year</th><td>2022</td></tr>
+          <tr><th>Color</th><td>Tango Red</td></tr>
+        </table>
       </div>
 
       <div class="tab-content" id="info">
@@ -327,7 +321,7 @@
     <div class="testimonials"></div>
 
     <div class="contact" id="contact">
-      <h2>Contact Us/ Book Test Drive</h2>
+      <h2>Contact Us / Book Test Drive</h2>
       <form action="https://formspree.io/f/xovvleqp" method="POST">
         <input type="email" name="email" placeholder="Your email" required>
         <textarea name="message" rows="5" placeholder="Your message..." required></textarea>
