@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AutoX - Car Details</title>
   <style>
     * {
@@ -13,22 +13,22 @@
 
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #111;
-      color: #fff;
+      background: linear-gradient(to right, #1c1c1c, #111);
+      color: white;
       line-height: 1.6;
     }
 
     .navbar {
       background: #000;
-      padding: 1.2rem 2rem;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
     }
 
     .logo {
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: bold;
       color: #fff;
     }
@@ -41,8 +41,8 @@
       text-decoration: none;
       background: #ff3c3c;
       color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
       font-size: 1rem;
       transition: background 0.3s;
     }
@@ -54,41 +54,44 @@
     .container {
       max-width: 1200px;
       margin: auto;
-      padding: 3rem 1rem;
+      padding: 2rem;
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 2Srem;
+      color: #ff3c3c;
       text-align: center;
       margin-bottom: 2rem;
-      color: #ff3c3c;
-      animation: fadeIn 1s ease-in-out;
+      animation: fadeIn 1s ease;
     }
 
     .slider-wrapper {
+      position: relative;
       overflow: hidden;
-      border-radius: 15px;
-      margin-bottom: 1rem;
+      border-radius: 16px;
+      margin: auto;
+      max-width: 100%;
     }
 
     .slider-track {
       display: flex;
-      transition: transform 0.5s ease;
+      transition: transform 0.5s ease-in-out;
     }
 
     .slider-track img {
       width: 100%;
-      height: 420px;
+      height: 400px;
       object-fit: cover;
-      border-radius: 15px;
+      flex-shrink: 0;
+      border-radius: 16px;
       cursor: pointer;
     }
 
     .dots {
       display: flex;
       justify-content: center;
-      gap: 10px;
       margin-top: 10px;
+      gap: 10px;
     }
 
     .dot {
@@ -115,13 +118,14 @@
     }
 
     .tab-buttons button {
-      background: #222;
-      color: white;
-      padding: 0.6rem 1.5rem;
+      padding: 0.7rem 2rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
+      background: #333;
+      color: white;
+      font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s;
     }
 
     .tab-buttons button.active {
@@ -129,11 +133,12 @@
     }
 
     .tab-content {
-      background: #1c1c1c;
+      background: #222;
       border-radius: 12px;
       padding: 2rem;
-      margin-top: 1.5rem;
+      margin-top: 1rem;
       display: none;
+      animation: fadeIn 0.5s ease;
     }
 
     .tab-content.active {
@@ -143,27 +148,26 @@
     .specs-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1rem;
     }
 
-    .specs-table th,
     .specs-table td {
       padding: 1rem;
-      text-align: left;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid #444;
     }
 
-    .specs-table th {
+    .specs-table td:first-child {
       color: #ff3c3c;
+      font-weight: bold;
+      width: 30%;
     }
 
     .cta {
       text-align: center;
-      margin: 3rem 0;
+      margin: 2rem 0;
     }
 
     .cta button {
-      padding: 1rem 2rem;
+      padding: 1rem 3rem;
       font-size: 1.2rem;
       background: #ff3c3c;
       border: none;
@@ -178,11 +182,11 @@
     }
 
     .testimonials {
-      background: #1c1c1c;
-      padding: 2rem;
-      border-radius: 10px;
-      text-align: center;
       margin-top: 3rem;
+      background: #222;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
     }
 
     .testimonials::before {
@@ -192,7 +196,7 @@
     }
 
     .contact {
-      background: #1c1c1c;
+      background: #222;
       padding: 2rem;
       border-radius: 12px;
       margin-top: 3rem;
@@ -207,18 +211,17 @@
     .contact form {
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 1rem;
     }
 
     .contact input,
     .contact textarea {
       width: 100%;
       padding: 1rem;
-      background: #333;
       border: none;
       border-radius: 8px;
+      background: #333;
       color: white;
-      resize: vertical;
     }
 
     .contact button {
@@ -228,7 +231,7 @@
       padding: 1rem 2rem;
       color: white;
       font-size: 1rem;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
       transition: background 0.3s;
     }
@@ -237,26 +240,9 @@
       background: #e02929;
     }
 
-    .lightbox {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .lightbox img {
-      max-width: 90%;
-      max-height: 85%;
-      border-radius: 12px;
-    }
-
     @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 768px) {
@@ -267,7 +253,6 @@
   </style>
 </head>
 <body>
-
   <header class="navbar">
     <div class="logo">Auto<span>X</span></div>
     <div class="nav-buttons">
@@ -300,12 +285,12 @@
 
       <div class="tab-content" id="specs">
         <table class="specs-table">
-          <tr><th>Engine</th><td>140 HP</td></tr>
-          <tr><th>Mileage</th><td>30,000 km</td></tr>
-          <tr><th>Transmission</th><td>CVT</td></tr>
-          <tr><th>Fuel Type</th><td>Gasoline</td></tr>
-          <tr><th>Year</th><td>2022</td></tr>
-          <tr><th>Color</th><td>Tango Red</td></tr>
+          <tr><td>Engine</td><td>140 HP</td></tr>
+          <tr><td>Mileage</td><td>30,000 km</td></tr>
+          <tr><td>Transmission</td><td>CVT</td></tr>
+          <tr><td>Fuel Type</td><td>Gasoline</td></tr>
+          <tr><td>Year</td><td>2022</td></tr>
+          <tr><td>Color</td><td>Tango Red</td></tr>
         </table>
       </div>
 
@@ -330,57 +315,55 @@
     </div>
   </main>
 
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <img id="lightboxImg" />
-  </div>
-
   <script>
     const sliderTrack = document.getElementById('sliderTrack');
     const slides = sliderTrack.children;
     const dotsContainer = document.getElementById('dots');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
     let currentSlide = 0;
-    let startX = 0;
 
     function updateSlider() {
       sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-      document.querySelectorAll('.dot').forEach((dot, i) => {
+      [...dotsContainer.children].forEach((dot, i) => {
         dot.classList.toggle('active', i === currentSlide);
       });
     }
 
-    for (let i = 0; i < slides.length; i++) {
+    [...slides].forEach((_, i) => {
       const dot = document.createElement('div');
       dot.className = 'dot';
       dot.addEventListener('click', () => { currentSlide = i; updateSlider(); });
       dotsContainer.appendChild(dot);
-    }
-
-    sliderTrack.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-    sliderTrack.addEventListener('touchend', e => {
-      let endX = e.changedTouches[0].clientX;
-      if (startX - endX > 50) currentSlide = (currentSlide + 1) % slides.length;
-      else if (endX - startX > 50) currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-      updateSlider();
     });
 
     updateSlider();
-
-    function openLightbox(src) {
-      lightboxImg.src = src;
-      lightbox.style.display = 'flex';
-    }
-
-    function closeLightbox() {
-      lightbox.style.display = 'none';
-    }
 
     function openTab(evt, tabId) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
       evt.target.classList.add('active');
+    }
+
+    function openLightbox(src) {
+      const lightbox = document.createElement('div');
+      lightbox.style.position = 'fixed';
+      lightbox.style.top = 0;
+      lightbox.style.left = 0;
+      lightbox.style.width = '100%';
+      lightbox.style.height = '100%';
+      lightbox.style.background = 'rgba(0,0,0,0.9)';
+      lightbox.style.display = 'flex';
+      lightbox.style.justifyContent = 'center';
+      lightbox.style.alignItems = 'center';
+      lightbox.style.zIndex = 1000;
+      const img = document.createElement('img');
+      img.src = src;
+      img.style.maxWidth = '90%';
+      img.style.maxHeight = '80%';
+      img.style.borderRadius = '10px';
+      lightbox.appendChild(img);
+      lightbox.onclick = () => document.body.removeChild(lightbox);
+      document.body.appendChild(lightbox);
     }
   </script>
 </body>
